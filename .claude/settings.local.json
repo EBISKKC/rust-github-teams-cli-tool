@@ -9,7 +9,9 @@
       "Bash(git init:*)",
       "Bash(git config:*)",
       "Bash(git add:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(./target/release/git-team-stats report:*)",
+      "Bash(./target/release/git-team-stats:*)"
     ],
     "deny": [],
     "ask": []
