@@ -18,7 +18,8 @@ pub fn analyze_contributors(
 ) -> Result<Vec<ContributorStats>, git2::Error> {
     let mut stats_map: HashMap<String, ContributorStats> = HashMap::new();
     let mut revwalk = repo.revwalk()?;
-    revwalk.push_head()?;
+    // Analyze all branches, not just HEAD
+    revwalk.push_glob("refs/*")?;
 
     for oid in revwalk {
         let oid = oid?;

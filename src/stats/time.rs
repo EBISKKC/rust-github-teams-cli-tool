@@ -12,7 +12,8 @@ pub struct TimeStats {
 pub fn analyze_time_distribution(repo: &Repository, days: i64) -> Result<TimeStats, git2::Error> {
     let mut time_stats = TimeStats::default();
     let mut revwalk = repo.revwalk()?;
-    revwalk.push_head()?;
+    // Analyze all branches, not just HEAD
+    revwalk.push_glob("refs/*")?;
 
     for oid in revwalk {
         let oid = oid?;

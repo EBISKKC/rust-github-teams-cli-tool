@@ -12,7 +12,8 @@ pub struct FileStats {
 pub fn analyze_file_changes(repo: &Repository, days: i64) -> Result<Vec<FileStats>, git2::Error> {
     let mut file_map: HashMap<String, FileStats> = HashMap::new();
     let mut revwalk = repo.revwalk()?;
-    revwalk.push_head()?;
+    // Analyze all branches, not just HEAD
+    revwalk.push_glob("refs/*")?;
 
     for oid in revwalk {
         let oid = oid?;
