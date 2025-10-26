@@ -13,7 +13,8 @@
       "Bash(./target/release/git-team-stats report:*)",
       "Bash(./target/release/git-team-stats:*)",
       "Bash(cargo install:*)",
-      "Bash(gtct:*)"
+      "Bash(gtct:*)",
+      "Read(//Users/ebisushingo/Desktop/work/hrdx/**)"
     ],
     "deny": [],
     "ask": []

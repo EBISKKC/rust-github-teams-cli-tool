@@ -4,6 +4,7 @@ A fast and beautiful command-line tool for analyzing Git repository statistics a
 
 ## Features
 
+- **自動リモート取得**: 実行時に自動的に `git fetch --all` を実行し、最新データを取得
 - **全ブランチ対応**: すべてのブランチのコミット履歴を分析
 - **Contributor Statistics**: 詳細な貢献者別統計（コミット数、追加/削除行数）
 - **Time-based Analysis**: 時間帯別・曜日別のコミットパターン可視化
@@ -337,6 +338,29 @@ Rustによる最適化で高速:
 
 このツールは `git log --all` 相当の処理を行い、**すべてのブランチ**のコミットを分析します。
 特定のブランチのみを分析したい場合は、そのブランチにチェックアウトしてから `--repo` でそのパスを指定してください。
+
+### 自動リモート取得
+
+**重要**: このツールは実行時に自動的に `git fetch --all` を実行します。
+
+実行されること:
+- ✅ すべてのリモートから最新データを自動取得
+- ✅ リモートブランチの最新コミットを分析に含める
+- ✅ チーム全体の最新の活動を反映
+
+これにより、常に最新のリポジトリ状態で統計を取得できます。
+
+```bash
+# 実行例
+gtct summary
+
+# 出力:
+# 🔄 Fetching latest data from remotes... ✓ Fetched 1 remote(s)
+# 📈 Team Summary
+# ...
+```
+
+**注意**: fetch処理により、初回実行時は若干時間がかかる場合があります（数秒〜数十秒）。
 
 ## Future Enhancements
 

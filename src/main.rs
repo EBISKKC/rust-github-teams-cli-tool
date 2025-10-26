@@ -11,6 +11,48 @@ use display::{display_contributors, display_file_changes, display_summary, displ
 use git2::Repository;
 use stats::{analyze_contributors, analyze_file_changes, analyze_time_distribution};
 
+/// Fetch all remotes to ensure we have the latest data
+fn fetch_all_remotes(repo: &Repository) {
+    print!("{}", "🔄 Fetching latest data from remotes...".cyan());
+    std::io::Write::flush(&mut std::io::stdout()).ok();
+
+    let remotes = match repo.remotes() {
+        Ok(remotes) => remotes,
+        Err(_) => {
+            println!(" {}", "No remotes found, skipping fetch".yellow());
+            return;
+        }
+    };
+
+    let mut fetch_count = 0;
+    let mut has_remotes = false;
+
+    for remote_name in remotes.iter().flatten() {
+        has_remotes = true;
+        if let Ok(mut remote) = repo.find_remote(remote_name) {
+            // Fetch all refs for this remote
+            let refspec = format!("+refs/heads/*:refs/remotes/{}/*", remote_name);
+            match remote.fetch(&[refspec.as_str()], None, None) {
+                Ok(_) => {
+                    fetch_count += 1;
+                }
+                Err(_) => {
+                    // Silently continue on fetch error (might be network issue)
+                    continue;
+                }
+            }
+        }
+    }
+
+    if fetch_count > 0 {
+        println!(" {}", format!("✓ Fetched {} remote(s)", fetch_count).green());
+    } else if has_remotes {
+        println!(" {}", "Already up to date".dimmed());
+    } else {
+        println!(" {}", "No remotes configured".dimmed());
+    }
+}
+
 fn main() {
     let cli = Cli::parse();
     let config = Config::from_env();
@@ -26,6 +68,9 @@ fn main() {
             std::process::exit(1);
         }
     };
+
+    // Automatically fetch all remotes before analysis
+    fetch_all_remotes(&repo);
 
     let result = match cli.command {
         Commands::Contributors { days } => {

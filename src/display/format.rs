@@ -125,11 +125,7 @@ pub fn display_summary(
 
     // Repository info - show path instead of branch
     if let Some(path) = repo.path().parent() {
-        println!(
-            "{}: {}",
-            "Repository".bold(),
-            path.display().to_string().yellow()
-        );
+        println!("{}: {}", "Repository".bold(), path.display().to_string().yellow());
     }
 
     println!();
