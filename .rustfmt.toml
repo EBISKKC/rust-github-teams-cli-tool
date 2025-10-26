@@ -1,0 +1,80 @@
+# Rustfmt configuration
+# See https://rust-lang.github.io/rustfmt/
+
+# Edition (should match Cargo.toml)
+edition = "2021"
+
+# Maximum width of each line
+max_width = 100
+
+# Maximum width of the args of a function call before falling back to vertical formatting
+fn_call_width = 80
+
+# Maximum width of a chain to fit on a single line
+chain_width = 80
+
+# Brace style for items
+brace_style = "SameLineWhere"
+
+# Where to put a binary operator when a binary expression goes multiline
+binop_separator = "Front"
+
+# Use field init shorthand if possible
+use_field_init_shorthand = true
+
+# Reorder imports alphabetically
+reorder_imports = true
+
+# Reorder module declarations alphabetically
+reorder_modules = true
+
+# Format code in doctest
+format_code_in_doc_comments = true
+
+# Format generated files
+format_generated_files = false
+
+# Merge multiple imports into a single nested import
+imports_granularity = "Crate"
+
+# Use small heuristics to determine parameter layout
+fn_params_layout = "Tall"
+
+# Controls whether arm bodies are wrapped in cases where the first line of the body cannot fit on the same line as the => operator
+match_arm_blocks = true
+
+# Put a trailing comma after a block based match arm (non-block arms are not affected)
+match_block_trailing_comma = false
+
+# Maximum line length for single line if-else expressions
+single_line_if_else_max_width = 50
+
+# Format string literals where necessary
+format_strings = true
+
+# Remove nested parens
+remove_nested_parens = true
+
+# Merge multiple derives into a single one
+merge_derives = true
+
+# Use tab characters for indentation, spaces for alignment
+hard_tabs = false
+
+# Number of spaces per tab
+tab_spaces = 4
+
+# Add trailing commas
+trailing_comma = "Vertical"
+
+# Add trailing semicolons
+trailing_semicolon = true
+
+# Break comments to fit on the line
+wrap_comments = true
+
+# Report all, none or unnumbered occurrences of TODO in source file comments
+report_todo = "Always"
+
+# Report all, none or unnumbered occurrences of FIXME in source file comments
+report_fixme = "Always"

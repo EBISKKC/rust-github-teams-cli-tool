@@ -1,0 +1,35 @@
+# Clippy configuration
+# See https://doc.rust-lang.org/clippy/lint_configuration.html
+
+# The minimum rust version that the project supports
+msrv = "1.70.0"
+
+# Lint: Warn when function takes too many arguments
+too-many-arguments-threshold = 7
+
+# Lint: Warn when type has too many lines
+type-complexity-threshold = 250
+
+# Lint: Warn when function has too many lines
+too-many-lines-threshold = 100
+
+# Lint: Single char pattern in string search functions
+single-char-binding-names-threshold = 4
+
+# Whether to accept a safety comment to be placed above the attributes for the unsafe block
+accept-comment-above-attributes = true
+
+# Whether to accept a safety comment to be placed above the statement for the unsafe block
+accept-comment-above-statement = true
+
+# List of allowed module names
+allowed-duplicate-crates = []
+
+# Whether to allow mixed uninlined format args, e.g. `format!("{} {}", a, foo.bar)`
+allow-mixed-uninlined-format-args = true
+
+# Don't warn about wildcard imports from these modules
+allowed-wildcard-imports = []
+
+# Maximum size of arrays to check for linting
+array-size-threshold = 512000
