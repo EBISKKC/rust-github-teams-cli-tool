@@ -16,7 +16,7 @@ fn main() {
     let config = Config::from_env();
 
     // Use config to determine repo path
-    let repo_path = config.get_repo_path(Some(&cli.repo));
+    let repo_path = config.get_repo_path(&cli.repo);
 
     let repo = match Repository::open(&repo_path) {
         Ok(repo) => repo,

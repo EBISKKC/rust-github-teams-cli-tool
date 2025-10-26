@@ -42,11 +42,13 @@ impl Config {
     }
 
     /// Get the repository path, falling back to CLI argument or current directory
-    pub fn get_repo_path(&self, cli_repo: Option<&PathBuf>) -> PathBuf {
-        cli_repo
-            .cloned()
-            .or_else(|| self.repository.clone())
-            .unwrap_or_else(|| PathBuf::from("."))
+    pub fn get_repo_path(&self, cli_repo: &PathBuf) -> PathBuf {
+        // If CLI repo is the default ".", prefer .env setting
+        if cli_repo.as_os_str() == "." {
+            self.repository.clone().unwrap_or_else(|| PathBuf::from("."))
+        } else {
+            cli_repo.clone()
+        }
     }
 
     /// Filter contributors by configured teams
